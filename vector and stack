@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    vector<int>a;
+    int size;
+    cin>>size;
+    for(int i=0;i<size;i++)
+    {
+    	int n;
+        cin>>n;
+        a.push_back(n);
+    }
+    stack<int>aa;
+    for(int i=0;i<size;i++)
+    {
+    	if(aa.empty())
+    	{
+    		aa.push(a[i]);
+		}
+        else if(aa.top()==a[i])
+        {
+            aa.pop();
+        }
+        else
+        {
+            aa.push(a[i]);
+        }
+    }
+    if(aa.empty()) 
+	{
+		cout<<"Empty";
+	}
+    else
+    {
+    	while(!aa.empty())
+    	{
+    		cout<<aa.top()<<" ";
+    		aa.pop();
+		}
+	}
+    return 0;
+}
