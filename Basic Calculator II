@@ -1,0 +1,75 @@
+class Solution {
+public:
+    int Priority(char c)
+    {
+        if(c=='+' || c=='-') return 1;
+        if(c=='*' || c=='/') return 2;
+        return 0;
+    }
+    int Evaluate(int a,int b,char o)
+    {
+        if(o=='+') return a+b;
+        if(o=='-') return b-a;
+        if(o=='/') return int(b/a);
+        if(o=='*') return a*b;
+        return 0;
+    }
+    int calculate(string s) {
+    stack<int>N;
+	stack<char>O;
+	for(int i=0;i<s.size();i++)
+	{
+        if(s[i]==' ') 
+        {
+            continue;
+        }
+		else if(s[i]<='9' && s[i]>='0')
+		{
+			int n=0;
+			while(s[i]<='9' && s[i]>='0')
+			{
+				n=n*10+int(s[i]-'0');
+				i++;
+			}
+			i--;
+			N.push(n);
+		}
+		else
+		{
+			if(O.empty())
+			{
+				O.push(s[i]);
+			}
+			else
+			{
+				while(Priority(s[i])<=Priority(O.top()))
+				{
+					int a=N.top();
+					N.pop();
+					int b=N.top();
+					N.pop();
+					char o=O.top();
+					O.pop();
+					N.push(Evaluate(a,b,o));
+					if(O.empty())
+					{
+						break;
+					}
+				}
+                O.push(s[i]);
+			}
+		}
+	}
+	while(!O.empty())
+	{
+		int a=N.top();
+		N.pop();
+		int b=N.top();
+		N.pop();
+		char o=O.top();
+		O.pop();
+		N.push(Evaluate(a,b,o));
+	}
+	return N.top();
+    }
+};
