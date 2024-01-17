@@ -1,0 +1,113 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class YouTube{
+public:
+    string channelName;
+    string username;
+    int subscriptionsCount;
+    vector<string> playlists;
+    YouTube(string cn,string un)
+    {
+    	cout<<"Welcome to Youtube"<<endl;
+    	channelName=cn;
+    	username=un;
+    	subscriptionsCount=0;
+	}
+
+    void displayChannelInfo() 
+	{
+        cout << "Channel Name: " << channelName << "\nUsername: " << username << "\nSubscribers: " << subscriptionsCount << endl;
+    }
+
+    void subscribe() 
+	{
+        subscriptionsCount++;
+        cout << "You have subscribed to " << channelName << endl;
+    }
+
+    void unsubscribe() 
+	{
+        if (subscriptionsCount > 0) 
+		{
+            subscriptionsCount--;
+            cout << "You have unsubscribed from " << channelName << endl;
+        } 
+		else 
+		{
+            cout << "You are not subscribed to " << channelName << endl;
+        }
+    }
+
+    void addPlaylist(string playlistName) 
+	{
+        playlists.push_back(playlistName);
+        cout << "Playlist '" << playlistName << "' added to " << channelName << endl;
+    }
+
+    void displayPlaylists() 
+	{
+        if (playlists.empty()) 
+		{
+            cout << "No playlists found for " << channelName << endl;
+        } 
+		else 
+		{
+            cout << "Playlists for " << channelName << ":\n";
+            int i;
+            for (i=0;i<playlists.size();i++) 
+			{
+                cout << " - " << playlists[i] << endl;
+            }
+        }
+    }
+};
+
+int main() 
+{
+    string channelName, username, playlistName;
+    char choice;
+    YouTube channel("MR.Beast", "A.Deep Tejaswi");
+
+    while (true) 
+	{
+        cout << "\nMenu:\n1. Details\n2. Subscribe\n3. Unsubscribe\n4. Add Playlist\n5. Display Playlists\n6. Exit\nEnter your choice: ";
+        cin >> choice;
+
+        if (choice == '6') 
+		{
+            cout << "Thank You";
+            break;
+        }
+
+        if (choice == '1') 
+		{
+            channel.displayChannelInfo();
+            channel.displayPlaylists();
+        } 
+		else if (choice == '2') 
+		{
+            channel.subscribe();
+        } 
+		else if (choice == '3') 
+		{
+            channel.unsubscribe();
+        } 
+		else if (choice == '4') 
+		{
+            cout << "Enter the name of the playlist to add: ";
+            cin >> playlistName;
+            channel.addPlaylist(playlistName);
+        } 
+		else if (choice == '5') 
+		{
+            channel.displayPlaylists();
+        } 
+		else 
+		{
+            cout << "Invalid choice. Please try again.\n";
+        }
+    }
+
+    return 0;
+}
