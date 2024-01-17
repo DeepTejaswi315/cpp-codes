@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+
+    for (int i = 0; i < t; ++i) {
+        int h, x, y1, y2, k;
+        cin >> h >> x >> y1 >> y2 >> k;
+        int c = 0;
+
+        int a = (h % x == 0) ? h / x : (h / x) + 1;
+
+        if (h <= (k * y1)) {
+            if (h == (k * y1)) {
+                c = k;
+            } else if (h % y1 == 0) {
+                c = h / y1;
+            } else {
+                c = h / y1 + 1;
+            }
+        } else {
+            h = h - y1 * k;
+            c = k;
+
+            if (h % y2 == 0) {
+                c += h / y2;
+            } else {
+                c += h / y2 + 1;
+            }
+        }
+
+        cout << min(a, c) << endl;
+    }
+
+    return 0;
+}
