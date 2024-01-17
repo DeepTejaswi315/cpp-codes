@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int n,arr[n],i,num,index;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>arr[i];
+	}
+	cin>>num;
+	for(i=0;i<n;i++)
+	{
+		if(arr[i]==num)
+		{
+			index=i;
+			break;
+		}
+	}
+	cout<<index;
+	return 0;
+}
